@@ -1,0 +1,53 @@
+﻿@model List<Eagle.Web.Models.DTO.ProductDTO>
+<br /> <br />
+
+<div class="container p-4 border">
+    <div class="row pb-2"> 
+        <div class="col">
+            <h1 class="text-primary">
+                Product List
+            </h1>
+        </div>
+         <div class="col text-end pt-1">
+             <a asp-action="CreateProduct" class="btn btn-outline-primary">
+                 <i class="fa fa-plus"> Create New Product</i>
+             </a>
+        </div>
+    </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Category Name
+                </th>
+                <th>
+                    Price
+                </th>
+                <th></th>
+            </tr>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @item.Name
+                        </td>
+                        <td>
+                            @item.CategoryName
+                        </td>
+                        <td>
+                            @(item.Price.ToString("C"))
+                        </td>
+                        <td>
+                            <a asp-action="EditProduct" class="btn btn-outline-success" asp-route-ProductId="@item.ProductId"><i class="fa fa-edit"></i> Edit</a>
+                            <a asp-action="DeleteProduct" class="btn btn-outline-danger" asp-route-ProductId="@item.ProductId"><i class="fa fa-trash"></i> Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </thead>
+    </table>
+</div>

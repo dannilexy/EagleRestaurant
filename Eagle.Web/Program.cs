@@ -1,7 +1,15 @@
+using Eagle.Web;
+using Eagle.Web.Service;
+using Eagle.Web.Service.IService;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddHttpClient<IProductServices, ProductService>();
+
+SD.ProductAPIBase = builder.Configuration.GetValue<string>("ServiceUrls:ProductAPI");
+builder.Services.AddScoped<IProductServices,ProductService>();
 
 var app = builder.Build();
 
