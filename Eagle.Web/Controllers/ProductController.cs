@@ -50,7 +50,7 @@ namespace Eagle.Web.Controllers
             return View();
         }
 
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         public async Task<IActionResult> EditProduct(int ProductId)
         {
             var accessToken = await HttpContext.GetTokenAsync("access_token");

@@ -18,7 +18,6 @@ namespace Eagle.Services.ProductAPI.Controllers
             _response = new ResponseDto();
         }
         [HttpGet]
-        [Authorize]
         public async Task<ResponseDto> GetProduct()
         {
             try
@@ -40,7 +39,6 @@ namespace Eagle.Services.ProductAPI.Controllers
         }
 
         [HttpGet]
-        [Authorize]
         [Route("{ProductId}")]
         public async Task<ResponseDto> GetProductById(int ProductId)
         {
