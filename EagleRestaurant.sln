@@ -5,11 +5,13 @@ VisualStudioVersion = 17.2.32630.192
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "FrontEnd", "FrontEnd", "{4FD5BE6D-1482-4263-8BA6-42892913714B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Eagle.Web", "Eagle.Web\Eagle.Web.csproj", "{44FF9C96-1081-4947-97A9-4CE5C3021223}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Eagle.Web", "Eagle.Web\Eagle.Web.csproj", "{44FF9C96-1081-4947-97A9-4CE5C3021223}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{630CD901-FFCC-48E9-A65F-AC177AC79183}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Eagle.Services.ProductAPI", "Eagle.Services.ProductAPI\Eagle.Services.ProductAPI.csproj", "{7DB50784-0D44-42B5-9A47-BD99C9E3AB79}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Eagle.Services.ProductAPI", "Eagle.Services.ProductAPI\Eagle.Services.ProductAPI.csproj", "{7DB50784-0D44-42B5-9A47-BD99C9E3AB79}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mango.Services.Identity", "Eagle.Services.Identity\Mango.Services.Identity.csproj", "{491309F9-C7DA-48F1-871B-D9D0A3ED7E67}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,6 +27,10 @@ Global
 		{7DB50784-0D44-42B5-9A47-BD99C9E3AB79}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7DB50784-0D44-42B5-9A47-BD99C9E3AB79}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7DB50784-0D44-42B5-9A47-BD99C9E3AB79}.Release|Any CPU.Build.0 = Release|Any CPU
+		{491309F9-C7DA-48F1-871B-D9D0A3ED7E67}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{491309F9-C7DA-48F1-871B-D9D0A3ED7E67}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{491309F9-C7DA-48F1-871B-D9D0A3ED7E67}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{491309F9-C7DA-48F1-871B-D9D0A3ED7E67}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -32,6 +38,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{44FF9C96-1081-4947-97A9-4CE5C3021223} = {4FD5BE6D-1482-4263-8BA6-42892913714B}
 		{7DB50784-0D44-42B5-9A47-BD99C9E3AB79} = {630CD901-FFCC-48E9-A65F-AC177AC79183}
+		{491309F9-C7DA-48F1-871B-D9D0A3ED7E67} = {630CD901-FFCC-48E9-A65F-AC177AC79183}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C7B40F89-89FC-46C9-A510-F4299CBAF0DC}

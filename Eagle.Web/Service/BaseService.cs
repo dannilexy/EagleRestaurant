@@ -3,6 +3,7 @@ using Eagle.Web.Models.DTO;
 using Eagle.Web.Service.IService;
 using Newtonsoft.Json;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 
 namespace Eagle.Web.Service
@@ -30,6 +31,10 @@ namespace Eagle.Web.Service
                 {
                     message.Content = new StringContent(JsonConvert.SerializeObject(apiRequest.Data),
                         Encoding.UTF8, "application/json");
+                }
+                if (!string.IsNullOrEmpty(apiRequest.Token))
+                {
+                    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", apiRequest.Token);
                 }
                 HttpResponseMessage apiResponse = null;
                 switch (apiRequest.ApiType)

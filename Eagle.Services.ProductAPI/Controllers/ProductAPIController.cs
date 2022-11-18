@@ -1,5 +1,6 @@
 ﻿using Eagle.Services.ProductAPI.Models.DTO;
 using Eagle.Services.ProductAPI.Repository;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -17,6 +18,7 @@ namespace Eagle.Services.ProductAPI.Controllers
             _response = new ResponseDto();
         }
         [HttpGet]
+        [Authorize]
         public async Task<ResponseDto> GetProduct()
         {
             try
@@ -38,6 +40,7 @@ namespace Eagle.Services.ProductAPI.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         [Route("{ProductId}")]
         public async Task<ResponseDto> GetProductById(int ProductId)
         {
@@ -60,6 +63,7 @@ namespace Eagle.Services.ProductAPI.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<ResponseDto> CreateProduct([FromBody]ProductDTO productDTO)
         {
             try
@@ -80,6 +84,7 @@ namespace Eagle.Services.ProductAPI.Controllers
             return _response;
         }
         [HttpPut]
+        [Authorize]
         public async Task<ResponseDto> UpdateProduct([FromBody] ProductDTO productDTO)
         {
             try
@@ -101,6 +106,7 @@ namespace Eagle.Services.ProductAPI.Controllers
         }
 
         [HttpDelete]
+        [Authorize(Roles = "Admin")]
         [Route("{ProductId}")]
         public async Task<ResponseDto> DeleteProduct(int ProductId)
         {
