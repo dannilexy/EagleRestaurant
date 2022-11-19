@@ -1,6 +1,7 @@
 using Eagle.Web;
 using Eagle.Web.Service;
 using Eagle.Web.Service.IService;
+using Microsoft.AspNetCore.Authentication;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,6 +21,8 @@ builder.Services.AddAuthentication(options =>
         d.ClientId = "eagle";
         d.ClientSecret = "secret";
         d.ResponseType = "code";
+        d.ClaimActions.MapJsonKey("role", "role", "role");
+        d.ClaimActions.MapJsonKey("sub", "sub", "sub");
 
         d.TokenValidationParameters.NameClaimType = "name";
         d.TokenValidationParameters.RoleClaimType = "role";
@@ -29,9 +32,12 @@ builder.Services.AddAuthentication(options =>
     });
 
 builder.Services.AddHttpClient<IProductServices, ProductService>();
+builder.Services.AddHttpClient<ICartService, CartService>();
 
 SD.ProductAPIBase = builder.Configuration.GetValue<string>("ServiceUrls:ProductAPI");
+SD.ShoppingCartAPIBase = builder.Configuration.GetValue<string>("ServiceUrls:ShoppingCartAPI");
 builder.Services.AddScoped<IProductServices,ProductService>();
+builder.Services.AddScoped<ICartService,CartService>();
 
 var app = builder.Build();
 

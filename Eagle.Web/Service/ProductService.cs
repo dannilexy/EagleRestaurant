@@ -39,7 +39,7 @@ namespace Eagle.Web.Service
                 ApiType = SD.ApiType.Get,
                 Url = SD.ProductAPIBase + "api/products",
                 Token = token,
-            }); ;
+            }); 
         }
 
         public async Task<T> GetProductByIdAsync<T>(int Id, string token)
