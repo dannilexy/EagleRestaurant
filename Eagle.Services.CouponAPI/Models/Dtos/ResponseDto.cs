@@ -1,4 +1,4 @@
-﻿namespace Eagle.Services.ProductAPI.Models.DTO
+﻿namespace Eagle.Services.CouponAPI.Models.Dtos
 {
     public class ResponseDto
     {
