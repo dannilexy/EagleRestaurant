@@ -27,7 +27,7 @@ namespace Eagle.Web.Service
             return await this.SendAsync<T>(new Models.APIRequest
             {
                 ApiType = SD.ApiType.Get,
-                Url = SD.ShoppingCartAPIBase + "api/GetCart/" + id,
+                Url = SD.ShoppingCartAPIBase + "api/Cart/GetCart/" + id,
                 Token = token,
             });
         }
