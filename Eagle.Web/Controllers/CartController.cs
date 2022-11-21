@@ -11,10 +11,12 @@ namespace Eagle.Web.Controllers
     {
         private readonly IProductServices _product;
         private readonly ICartService _cartService;
-        public CartController(IProductServices product, ICartService cartService)
+        private readonly ICouponService _coupon;
+        public CartController(IProductServices product, ICartService cartService, ICouponService _coupon)
         {
             _product = product;
             _cartService = cartService;
+            this._coupon = _coupon;
         }
 
         [Authorize]
@@ -22,6 +24,28 @@ namespace Eagle.Web.Controllers
         {
             return View(await LoadCartBasedOnLoggedInUser());
         }
+
+        [HttpGet]
+        public async Task<IActionResult> Checkout()
+        {
+            return View(await LoadCartBasedOnLoggedInUser());
+        }
+
+        [HttpPost]
+        [ActionName("ApplyCoupon")]
+        public async Task<IActionResult> ApplyCoupon(CartDto cartDto)
+        {
+            var UserId = User.Claims.Where(x => x.Type == "sub")?.FirstOrDefault()?.Value;
+            var accessToken = await HttpContext.GetTokenAsync("access_token");
+            var response = await _cartService.ApplyCoupon<ResponseDto>(cartDto, accessToken);
+            if (response.IsSuccess && response.Result != null)
+            {
+                return RedirectToAction(nameof(CartIndex));
+                //return cartDto;
+            }
+            return View();
+        }
+
         [Authorize]
         public async Task<IActionResult> Remove(int CartDetailsId)
         {
@@ -31,6 +55,21 @@ namespace Eagle.Web.Controllers
             if (response.IsSuccess && response.Result != null)
             {
                 return RedirectToAction(nameof(CartIndex));              
+                //return cartDto;
+            }
+            return View();
+        }
+
+        [HttpPost]
+        [ActionName("RemoveCoupon")]
+        public async Task<IActionResult> RemoveCoupon(CartDto cartDto)
+        {
+            var UserId = User.Claims.Where(x => x.Type == "sub")?.FirstOrDefault()?.Value;
+            var accessToken = await HttpContext.GetTokenAsync("access_token");
+            var response = await _cartService.RemoveCoupon<ResponseDto>(cartDto.CartHeader.UserId, accessToken);
+            if (response.IsSuccess && response.Result != null)
+            {
+                return RedirectToAction(nameof(CartIndex));
                 //return cartDto;
             }
             return View();
@@ -49,10 +88,20 @@ namespace Eagle.Web.Controllers
             }
             if (cartDto.CartHeader != null)
             {
+                if (!string.IsNullOrEmpty(cartDto.CartHeader.CouponCode))
+                {
+                    var couponResponse = await _coupon.GetCoupon<ResponseDto>(cartDto.CartHeader.CouponCode, accessToken);
+                    if (couponResponse.IsSuccess && couponResponse.Result != null)
+                    {
+                       var coupon = JsonConvert.DeserializeObject<CouponDto>(Convert.ToString(couponResponse.Result));
+                        cartDto.CartHeader.DisccountTotal = coupon.DiscountAmount;
+                    }
+                }
                 foreach (var detail in cartDto.CartDetails)
                 {
                     cartDto.CartHeader.OrderTotal += (detail.Product.Price * detail.Count);
                 }
+                cartDto.CartHeader.OrderTotal -= cartDto.CartHeader.DisccountTotal;
             }
             return cartDto;
         }

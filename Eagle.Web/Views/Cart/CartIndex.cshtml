@@ -54,21 +54,36 @@
                                 <span style="font-size:17px;"> @obj.Count</span>
                             </div>
                             <div class="col-2 col-lg-1 p-0 pt-lg-4 text-center">
-                                <a asp-action = "Remove" asp-route-CartDetailsId = "@obj.CartDetailsId" class="btn btn-outline-danger">
+                                <a asp-action="Remove" asp-route-CartDetailsId="@obj.CartDetailsId" class="btn btn-outline-danger">
                                     <i class="fa fa-trash"></i>
                                 </a>
                             </div>
                         </div>
-                    <hr />
+                        <hr />
                     }
                     <div class="row">
                         <div class="col-6">
-                            <span>Coupon:</span>
-                            <input />
-                            <button type="submit" class="btn-success"> Apply </button>
+
+                            @if (string.IsNullOrEmpty(Model.CartHeader.CouponCode))
+                            {
+                                <span>Coupon:</span>
+                                <input asp-action="" asp-for="CartHeader.CouponCode"/>
+                                <button type="submit" class="btn-success" asp-action="ApplyCoupon"> Apply </button>
+                            }
+                            else
+                            {
+                                 <span>Coupon:</span>
+                                <input  asp-for="CartHeader.CouponCode" disabled/>
+                                <button type="submit" class="btn-danger" asp-action="RemoveCoupon"> Remove </button>
+                                
+                            }
                         </div>
                         <div class="col-6 text-end">
                             <span class="text-danger" style="font-size:21px;">  Order Total : @Model.CartHeader.OrderTotal.ToString("C") <br /></span>
+                            @if (Model.CartHeader.DisccountTotal > 0)
+                                {
+                                    <span class="text-success">Discount Amount: @Model.CartHeader.DisccountTotal.ToString("c")</span>
+                                }
                         </div>
                     </div>
                 </div>

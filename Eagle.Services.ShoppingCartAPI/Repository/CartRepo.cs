@@ -16,6 +16,15 @@ namespace Eagle.Services.ShoppingCartAPI.Repository
             _mapper = mapper;
         }
 
+        public async Task<bool> ApplyCoupon(string UserId, string couponCode)
+        {
+            var cartFromDb = await _db.CartHeaders.FirstOrDefaultAsync(x => x.UserId.Equals(UserId));
+            cartFromDb.CouponCode = couponCode;
+            _db.Update(cartFromDb);
+            await _db.SaveChangesAsync();
+            return true;
+        }
+
         public async Task<bool> ClearCart(string UserId)
         {
            var cartHeaderFromDb = await _db.CartHeaders.FirstOrDefaultAsync(x=>x.UserId == UserId);
@@ -83,6 +92,15 @@ namespace Eagle.Services.ShoppingCartAPI.Repository
             cart.CartDetails = await _db.CartDetails.Include(x=>x.Product).Where(x => x.CartHeaderId == cart.CartHeader.CartHeaderId).ToListAsync();
 
             return _mapper.Map<CartDto>(cart);
+        }
+
+        public async Task<bool> RemoveCoupon(string UserId)
+        {
+            var cartFromDb = await _db.CartHeaders.FirstOrDefaultAsync(x => x.UserId.Equals(UserId));
+            cartFromDb.CouponCode = "";
+            _db.Update(cartFromDb);
+            await _db.SaveChangesAsync();
+            return true;
         }
 
         public async Task<bool> RemoveFromCart(int CartDetailId)

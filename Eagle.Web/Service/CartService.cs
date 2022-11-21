@@ -22,6 +22,17 @@ namespace Eagle.Web.Service
             });
         }
 
+        public async Task<T> ApplyCoupon<T>(CartDto cartDto, string token = null)
+        {
+            return await this.SendAsync<T>(new Models.APIRequest
+            {
+                ApiType = SD.ApiType.Post,
+                Data = cartDto,
+                Url = SD.ShoppingCartAPIBase + "api/cart/ApplyCoupon",
+                Token = token
+            });
+        }
+
         public async Task<T> GetCartByUserId<T>(string id, string token = null)
         {
             return await this.SendAsync<T>(new Models.APIRequest
@@ -29,6 +40,17 @@ namespace Eagle.Web.Service
                 ApiType = SD.ApiType.Get,
                 Url = SD.ShoppingCartAPIBase + "api/Cart/GetCart/" + id,
                 Token = token,
+            });
+        }
+
+        public async Task<T> RemoveCoupon<T>(string UserId, string token = null)
+        {
+            return await this.SendAsync<T>(new Models.APIRequest
+            {
+                ApiType = SD.ApiType.Post,
+                Data = UserId,
+                Url = SD.ShoppingCartAPIBase + "api/cart/RemoveCoupon",
+                Token = token
             });
         }
 

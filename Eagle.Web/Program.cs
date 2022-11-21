@@ -33,12 +33,14 @@ builder.Services.AddAuthentication(options =>
 
 builder.Services.AddHttpClient<IProductServices, ProductService>();
 builder.Services.AddHttpClient<ICartService, CartService>();
+builder.Services.AddHttpClient<ICouponService, CouponService>();
 
 SD.ProductAPIBase = builder.Configuration.GetValue<string>("ServiceUrls:ProductAPI");
 SD.ShoppingCartAPIBase = builder.Configuration.GetValue<string>("ServiceUrls:ShoppingCartAPI");
 SD.CouponAPIBase = builder.Configuration.GetValue<string>("ServiceUrls:CouponAPI");
 builder.Services.AddScoped<IProductServices,ProductService>();
 builder.Services.AddScoped<ICartService,CartService>();
+builder.Services.AddScoped<ICouponService,CouponService>();
 
 var app = builder.Build();
 
