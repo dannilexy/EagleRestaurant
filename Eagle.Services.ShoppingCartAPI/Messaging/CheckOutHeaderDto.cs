@@ -1,8 +1,9 @@
-﻿using Eagle.Services.ShoppingCartAPI.Models.Dto;
+﻿using Eagle.MessageBus;
+using Eagle.Services.ShoppingCartAPI.Models.Dto;
 
 namespace Eagle.Services.ShoppingCartAPI.Messaging
 {
-    public class CheckOutHeaderDto
+    public class CheckOutHeaderDto : BaseMessage
     {
         public int CartHeaderId { get; set; }
         public string UserId { get; set; }

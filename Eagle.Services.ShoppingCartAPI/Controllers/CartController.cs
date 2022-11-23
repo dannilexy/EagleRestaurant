@@ -1,4 +1,5 @@
-﻿using Eagle.Services.ShoppingCartAPI.Messaging;
+﻿using Eagle.MessageBus;
+using Eagle.Services.ShoppingCartAPI.Messaging;
 using Eagle.Services.ShoppingCartAPI.Models.Dto;
 using Eagle.Services.ShoppingCartAPI.Repository;
 using Microsoft.AspNetCore.Http;
@@ -11,11 +12,13 @@ namespace Eagle.Services.ShoppingCartAPI.Controllers
     public class CartController : ControllerBase
     {
         private readonly ICartRepo _cart;
+        private readonly IMessageBus _messageBus;
         protected ResponseDto _response;
-        public CartController(ICartRepo cart)
+        public CartController(ICartRepo cart, IMessageBus _messageBus)
         {
             _cart = cart;
             _response = new ResponseDto();
+            this._messageBus = _messageBus;
         }
 
         [HttpGet("GetCart/{userId}")]
@@ -130,7 +133,7 @@ namespace Eagle.Services.ShoppingCartAPI.Controllers
                     return null;
                 checkOutHeaderDto.CartDetails = cartDto.CartDetails;
                 //Login to add message to process Order
-
+                await _messageBus.PublishMessage(checkOutHeaderDto, "checkOutMessageTopic");
 
             }
             catch (Exception ex)
