@@ -33,6 +33,17 @@ namespace Eagle.Web.Service
             });
         }
 
+        public async Task<T> CheckOut<T>(CartHeaderDto cartHeaderDto, string token = null)
+        {
+            return await this.SendAsync<T>(new Models.APIRequest
+            {
+                ApiType = SD.ApiType.Post,
+                Data = cartHeaderDto,
+                Url = SD.ShoppingCartAPIBase + "api/cart/CheckOut",
+                Token = token
+            });
+        }
+
         public async Task<T> GetCartByUserId<T>(string id, string token = null)
         {
             return await this.SendAsync<T>(new Models.APIRequest

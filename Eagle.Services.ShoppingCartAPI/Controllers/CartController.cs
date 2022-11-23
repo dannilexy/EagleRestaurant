@@ -1,4 +1,5 @@
-﻿using Eagle.Services.ShoppingCartAPI.Models.Dto;
+﻿using Eagle.Services.ShoppingCartAPI.Messaging;
+using Eagle.Services.ShoppingCartAPI.Models.Dto;
 using Eagle.Services.ShoppingCartAPI.Repository;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -109,6 +110,28 @@ namespace Eagle.Services.ShoppingCartAPI.Controllers
             {
                 bool cart = await _cart.RemoveCoupon(userId);
                 _response.Result = cart;
+            }
+            catch (Exception ex)
+            {
+
+                _response.IsSuccess = false;
+                _response.ErrorMessages = new List<string> { ex.InnerException.Message };
+            }
+            return _response;
+        }
+
+        [HttpPost("CheckOut")]
+        public async Task<object> CheckOut([FromBody] CheckOutHeaderDto checkOutHeaderDto )
+        {
+            try
+            {
+                var cartDto = await _cart.GetCartByUserId(checkOutHeaderDto.UserId);
+                if (cartDto == null)
+                    return null;
+                checkOutHeaderDto.CartDetails = cartDto.CartDetails;
+                //Login to add message to process Order
+
+
             }
             catch (Exception ex)
             {

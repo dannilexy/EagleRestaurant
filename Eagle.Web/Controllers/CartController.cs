@@ -30,6 +30,31 @@ namespace Eagle.Web.Controllers
         {
             return View(await LoadCartBasedOnLoggedInUser());
         }
+        [HttpPost]
+        public async Task<IActionResult> Checkout(CartDto cart)
+        {
+            try
+            {
+                var UserId = User.Claims.Where(x => x.Type == "sub")?.FirstOrDefault()?.Value;
+                var accessToken = await HttpContext.GetTokenAsync("access_token");
+                var response = await _cartService.CheckOut<ResponseDto>(cart.CartHeader, accessToken);
+                if (true)
+                {
+                    return RedirectToAction(nameof(Confirmation));
+                }
+            }
+            catch (Exception)
+            {
+
+                return View(cart);
+            }
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Confirmation()
+        {
+            return View();
+        }
 
         [HttpPost]
         [ActionName("ApplyCoupon")]
