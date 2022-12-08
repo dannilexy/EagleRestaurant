@@ -19,7 +19,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Eagle.Services.CouponAPI", 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Integrations", "Integrations", "{74588023-8953-4ED2-B31A-A5A8D041E49D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Eagle.MessageBus", "Eagle.MessageBus\Eagle.MessageBus.csproj", "{F37FA3AB-1505-43E0-B26B-E1C2B42362CC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Eagle.MessageBus", "Eagle.MessageBus\Eagle.MessageBus.csproj", "{F37FA3AB-1505-43E0-B26B-E1C2B42362CC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Eaglez.Services.OrderAPI", "Eaglez.Services.OrderAPI\Eaglez.Services.OrderAPI.csproj", "{3F13DFE1-A437-4260-809A-1220470D7079}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +53,10 @@ Global
 		{F37FA3AB-1505-43E0-B26B-E1C2B42362CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F37FA3AB-1505-43E0-B26B-E1C2B42362CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F37FA3AB-1505-43E0-B26B-E1C2B42362CC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3F13DFE1-A437-4260-809A-1220470D7079}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3F13DFE1-A437-4260-809A-1220470D7079}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3F13DFE1-A437-4260-809A-1220470D7079}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3F13DFE1-A437-4260-809A-1220470D7079}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -62,6 +68,7 @@ Global
 		{494AE506-AE5A-4CA3-B8DB-E064E5FFDAC9} = {630CD901-FFCC-48E9-A65F-AC177AC79183}
 		{2C2399D9-62B7-41E6-AC32-D3A8C4CC2B90} = {630CD901-FFCC-48E9-A65F-AC177AC79183}
 		{F37FA3AB-1505-43E0-B26B-E1C2B42362CC} = {74588023-8953-4ED2-B31A-A5A8D041E49D}
+		{3F13DFE1-A437-4260-809A-1220470D7079} = {630CD901-FFCC-48E9-A65F-AC177AC79183}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C7B40F89-89FC-46C9-A510-F4299CBAF0DC}
