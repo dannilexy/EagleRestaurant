@@ -38,10 +38,13 @@ namespace Eagle.Web.Controllers
                 var UserId = User.Claims.Where(x => x.Type == "sub")?.FirstOrDefault()?.Value;
                 var accessToken = await HttpContext.GetTokenAsync("access_token");
                 var response = await _cartService.CheckOut<ResponseDto>(cart.CartHeader, accessToken);
-                if (true)
+                if (!response.IsSuccess)
                 {
-                    return RedirectToAction(nameof(Confirmation));
+                    TempData["Error"] = response.Message;
+                    return RedirectToAction(nameof(Checkout));
                 }
+
+                return RedirectToAction(nameof(Confirmation));
             }
             catch (Exception)
             {
@@ -79,7 +82,7 @@ namespace Eagle.Web.Controllers
             var response = await _cartService.RemoveFromCartAsync<ResponseDto>(CartDetailsId, accessToken);
             if (response.IsSuccess && response.Result != null)
             {
-                return RedirectToAction(nameof(CartIndex));              
+                return RedirectToAction(nameof(CartIndex));
                 //return cartDto;
             }
             return View();
@@ -118,7 +121,7 @@ namespace Eagle.Web.Controllers
                     var couponResponse = await _coupon.GetCoupon<ResponseDto>(cartDto.CartHeader.CouponCode, accessToken);
                     if (couponResponse.IsSuccess && couponResponse.Result != null)
                     {
-                       var coupon = JsonConvert.DeserializeObject<CouponDto>(Convert.ToString(couponResponse.Result));
+                        var coupon = JsonConvert.DeserializeObject<CouponDto>(Convert.ToString(couponResponse.Result));
                         cartDto.CartHeader.DisccountTotal = coupon.DiscountAmount;
                     }
                 }

@@ -12,13 +12,15 @@ namespace Eagle.Services.ShoppingCartAPI.Controllers
     public class CartController : ControllerBase
     {
         private readonly ICartRepo _cart;
+        private readonly ICouponRepo _coupon;
         private readonly IMessageBus _messageBus;
         protected ResponseDto _response;
-        public CartController(ICartRepo cart, IMessageBus _messageBus)
+        public CartController(ICartRepo cart, IMessageBus _messageBus, ICouponRepo _coupon)
         {
             _cart = cart;
             _response = new ResponseDto();
             this._messageBus = _messageBus;
+            this._coupon = _coupon;
         }
 
         [HttpGet("GetCart/{userId}")]
@@ -130,7 +132,19 @@ namespace Eagle.Services.ShoppingCartAPI.Controllers
             {
                 var cartDto = await _cart.GetCartByUserId(checkOutHeaderDto.UserId);
                 if (cartDto == null)
-                    return null;
+                    return BadRequest();
+                if (!string.IsNullOrEmpty(checkOutHeaderDto.CouponCode))
+                {
+                    var coupon = await _coupon.GetCoupon(checkOutHeaderDto.CouponCode);
+                    if (checkOutHeaderDto.DisccountTotal != coupon.DiscountAmount)
+                    {
+                        _response.IsSuccess = false;
+                        _response.ErrorMessages = new List<string>() { "Coupon price has changed, please confirm"};
+                        _response.Message = "Coupon price has changed, please confirm";
+                        return _response;
+                    }
+                }
+
                 checkOutHeaderDto.CartDetails = cartDto.CartDetails;
                 //Login to add message to process Order
                 await _messageBus.PublishMessage(checkOutHeaderDto, "checkOutMessageTopic");

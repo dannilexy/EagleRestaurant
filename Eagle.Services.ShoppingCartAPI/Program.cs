@@ -8,6 +8,7 @@ using Microsoft.OpenApi.Models;
 using Eagle.Services.ShoppingCartAPI.Repository;
 using Eagle.MessageBus;
 
+
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("ApplicationDbContext") ?? throw new InvalidOperationException("Connection string 'ApplicationDbContext' not found.")));
@@ -18,7 +19,9 @@ builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 // Add services to the container.
 builder.Services.AddScoped<ICartRepo, CartRepo>();
+builder.Services.AddScoped<ICouponRepo, CouponRepo>();
 builder.Services.AddSingleton<IMessageBus, AzureServiceBusMessageBus>();
+builder.Services.AddHttpClient<ICouponRepo, CouponRepo>(x=>x.BaseAddress = new Uri("https://localhost:44362/"));
 
 builder.Services.AddControllers();
 
