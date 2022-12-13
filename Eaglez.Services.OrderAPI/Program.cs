@@ -8,6 +8,7 @@ using Microsoft.IdentityModel.Tokens;
 using Eaglez.Services.OrderAPI.Repository;
 using Eaglez.Services.OrderAPI.Messaging;
 using Eaglez.Services.OrderAPI.Extensions;
+using Eagle.MessageBus;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
@@ -21,7 +22,7 @@ builder.Services.AddSingleton(mapper);
 // Add services to the container.
 builder.Services.AddScoped<IOrderRepo, OrderRepo>();
 builder.Services.AddScoped<IAzureMessageBusConsumer, AzureServiceBusConsumer>();
-//builder.Services.AddSingleton<IMessageBus, AzureServiceBusMessageBus>();
+builder.Services.AddSingleton<IMessageBus, AzureServiceBusMessageBus>();
 
 builder.Services.AddControllers();
 

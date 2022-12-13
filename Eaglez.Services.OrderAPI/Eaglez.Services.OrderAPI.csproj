@@ -23,4 +23,8 @@
     <Folder Include="Controllers\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Eagle.MessageBus\Eagle.MessageBus.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -11,7 +11,7 @@ namespace Eagle.MessageBus
     public class AzureServiceBusMessageBus : IMessageBus
     {
         //This is the connection string but wont go here as it show be in a key vault
-        private string ConnectionString = string.Empty;
+        private string ConnectionString = "Endpoint=sb://dms-bus-dev.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=8ggfQQVR6Q0I9lNQ50wsKyBWDWyvO/YN6IE16Vn5IMY=";
         public async Task PublishMessage(BaseMessage message, string topic)
         {
             await using var client = new ServiceBusClient(ConnectionString);

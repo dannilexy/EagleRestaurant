@@ -21,7 +21,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Integrations", "Integration
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Eagle.MessageBus", "Eagle.MessageBus\Eagle.MessageBus.csproj", "{F37FA3AB-1505-43E0-B26B-E1C2B42362CC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Eaglez.Services.OrderAPI", "Eaglez.Services.OrderAPI\Eaglez.Services.OrderAPI.csproj", "{3F13DFE1-A437-4260-809A-1220470D7079}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Eaglez.Services.OrderAPI", "Eaglez.Services.OrderAPI\Eaglez.Services.OrderAPI.csproj", "{3F13DFE1-A437-4260-809A-1220470D7079}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Payments", "Payments", "{80C4359F-4293-4795-BDAB-6471FB61AAF4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PaymentProcessor", "PaymentProcessor\PaymentProcessor.csproj", "{0B8E9302-1733-4533-9A7C-B33D448A79D0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Eaglez.Services.PaymentAPI", "Eaglez.Services.PaymentAPI\Eaglez.Services.PaymentAPI.csproj", "{009B2421-32FD-43DE-B192-A0A6E747438C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -57,6 +63,14 @@ Global
 		{3F13DFE1-A437-4260-809A-1220470D7079}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3F13DFE1-A437-4260-809A-1220470D7079}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3F13DFE1-A437-4260-809A-1220470D7079}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0B8E9302-1733-4533-9A7C-B33D448A79D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0B8E9302-1733-4533-9A7C-B33D448A79D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0B8E9302-1733-4533-9A7C-B33D448A79D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0B8E9302-1733-4533-9A7C-B33D448A79D0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{009B2421-32FD-43DE-B192-A0A6E747438C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{009B2421-32FD-43DE-B192-A0A6E747438C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{009B2421-32FD-43DE-B192-A0A6E747438C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{009B2421-32FD-43DE-B192-A0A6E747438C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -69,6 +83,8 @@ Global
 		{2C2399D9-62B7-41E6-AC32-D3A8C4CC2B90} = {630CD901-FFCC-48E9-A65F-AC177AC79183}
 		{F37FA3AB-1505-43E0-B26B-E1C2B42362CC} = {74588023-8953-4ED2-B31A-A5A8D041E49D}
 		{3F13DFE1-A437-4260-809A-1220470D7079} = {630CD901-FFCC-48E9-A65F-AC177AC79183}
+		{0B8E9302-1733-4533-9A7C-B33D448A79D0} = {80C4359F-4293-4795-BDAB-6471FB61AAF4}
+		{009B2421-32FD-43DE-B192-A0A6E747438C} = {630CD901-FFCC-48E9-A65F-AC177AC79183}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C7B40F89-89FC-46C9-A510-F4299CBAF0DC}

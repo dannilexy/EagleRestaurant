@@ -1,5 +1,7 @@
 ﻿using Azure.Messaging.ServiceBus;
+using Eagle.MessageBus;
 using Eagle.Services.OrderAPI.messages;
+using Eaglez.Services.OrderAPI.messages;
 using Eaglez.Services.OrderAPI.Models;
 using Eaglez.Services.OrderAPI.Repository;
 using Newtonsoft.Json;
@@ -12,21 +14,27 @@ namespace Eaglez.Services.OrderAPI.Messaging
         private readonly string serviceBusConnectionString;
         private readonly string subscriptionName;
         private readonly string checkOutMessageTopic;
+        private readonly string orderUpdatePaymentProcessTopic;
         private readonly IConfiguration _config;
         private readonly IOrderRepo _orderRepo;
+        private readonly IMessageBus _messageBus;
         //_config.GetValue<string>("Messaging:EnrouteOrderStatus")
 
         private ServiceBusProcessor checkOutProcessor;
-        public AzureServiceBusConsumer(IOrderRepo orderRepo, IConfiguration config)
+        private ServiceBusProcessor orderUpdatePaymentStatusProcessor;
+        public AzureServiceBusConsumer(IOrderRepo orderRepo, IConfiguration config, IMessageBus _messageBus)
         {
             _orderRepo = orderRepo;
             _config = config;
+            this._messageBus = _messageBus;
             serviceBusConnectionString = _config.GetValue<string>("serviceBusConnectionString");
             subscriptionName = _config.GetValue<string>("CheckOutMessageTopic");
             checkOutMessageTopic = _config.GetValue<string>("Subscription");
+            orderUpdatePaymentProcessTopic = _config.GetValue<string>("OrderUpdatePaymentProcessTopic");
 
             var serviceBusClient = new ServiceBusClient(serviceBusConnectionString);
             checkOutProcessor = serviceBusClient.CreateProcessor(checkOutMessageTopic, subscriptionName);
+            orderUpdatePaymentStatusProcessor = serviceBusClient.CreateProcessor(orderUpdatePaymentProcessTopic, subscriptionName);
         }
 
         public async Task Start()
@@ -34,12 +42,19 @@ namespace Eaglez.Services.OrderAPI.Messaging
             checkOutProcessor.ProcessMessageAsync += OnCheckOutMessageReceived;
             checkOutProcessor.ProcessErrorAsync += ErrorHandler;
             await checkOutProcessor.StartProcessingAsync();
+
+            orderUpdatePaymentStatusProcessor.ProcessMessageAsync += OnOrderPaymentUpdateRecieved;
+            orderUpdatePaymentStatusProcessor.ProcessErrorAsync += ErrorHandler;
+            await orderUpdatePaymentStatusProcessor.StartProcessingAsync();
         }
 
         public async Task Stop()
         {
            await checkOutProcessor.StopProcessingAsync();
             await checkOutProcessor.DisposeAsync();
+
+            await orderUpdatePaymentStatusProcessor.StopProcessingAsync();
+            await orderUpdatePaymentStatusProcessor.DisposeAsync();
         }
 
         Task ErrorHandler(ProcessErrorEventArgs args)
@@ -85,7 +100,36 @@ namespace Eaglez.Services.OrderAPI.Messaging
             }
 
             await _orderRepo.AddOrder(orderHeader);
-            
+
+
+            PaymentRequestMessage requestMessage = new PaymentRequestMessage
+            {
+                Name = orderHeader.FirstName + " " + orderHeader.LastName,
+                CardNumber = orderHeader.CardNumber,
+                CVV = orderHeader.CVV,
+                ExpiryMonthYear = orderHeader.ExpiryMonthYear,
+                OrderId = orderHeader.OrderHeaderId,
+                OrderTotal = orderHeader.OrderTotal,
+            };
+            try
+            {
+                await _messageBus.PublishMessage(requestMessage, "");
+                await args.CompleteMessageAsync(args.Message);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        private async Task OnOrderPaymentUpdateRecieved(ProcessMessageEventArgs args)
+        {
+            var message = args.Message;
+            var body = Encoding.UTF8.GetString(message.Body);
+
+            UpdatePaymentResultMessage updatePaymentResult = JsonConvert.DeserializeObject<UpdatePaymentResultMessage>(body);
+            await _orderRepo.UpdateOrder(updatePaymentResult.OrderId, updatePaymentResult.Status);
+            await args.CompleteMessageAsync(message);
         }
     }
 }

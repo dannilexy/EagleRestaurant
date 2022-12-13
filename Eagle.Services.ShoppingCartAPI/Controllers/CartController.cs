@@ -147,7 +147,17 @@ namespace Eagle.Services.ShoppingCartAPI.Controllers
 
                 checkOutHeaderDto.CartDetails = cartDto.CartDetails;
                 //Login to add message to process Order
-                await _messageBus.PublishMessage(checkOutHeaderDto, "checkOutMessageTopic");
+                try
+                {
+                    await _messageBus.PublishMessage(checkOutHeaderDto, "checkOutMessageTopic");
+                }
+                catch (Exception)
+                {
+
+                }
+
+                //Clear Cart
+                await _cart.ClearCart(checkOutHeaderDto.UserId);
 
             }
             catch (Exception ex)
