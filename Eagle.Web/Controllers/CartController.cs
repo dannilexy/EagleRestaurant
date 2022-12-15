@@ -108,6 +108,7 @@ namespace Eagle.Web.Controllers
             var UserId = User.Claims.Where(x => x.Type == "sub")?.FirstOrDefault()?.Value;
             var accessToken = await HttpContext.GetTokenAsync("access_token");
             var response = await _cartService.GetCartByUserId<ResponseDto>(UserId, accessToken);
+
             CartDto cartDto = new CartDto();
             if (response.IsSuccess && response.Result != null)
             {

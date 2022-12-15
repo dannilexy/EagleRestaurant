@@ -82,7 +82,7 @@ namespace Eagle.Web.Service
             {
                 ApiType = SD.ApiType.Post,
                 Data = cartDto,
-                Url = SD.ShoppingCartAPIBase + "api/cart/RemoveFromCart",
+                Url = SD.ShoppingCartAPIBase + "api/cart/UpdateCart",
                 Token = token
             });
         }

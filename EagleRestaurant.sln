@@ -31,6 +31,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Eaglez.Services.PaymentAPI"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Eaglez.Services.Emails", "Eaglez.Services.Emails\Eaglez.Services.Emails.csproj", "{4C03EFC2-D382-4CD5-B9F4-B2CDC2CE0EE4}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Gateway", "Gateway", "{5CF99196-6409-44B1-A68C-1E31DA621670}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Eaglez.GatewaySolution", "Eaglez.GatewaySolution\Eaglez.GatewaySolution.csproj", "{C8F0FA3F-D2B7-43CB-A45D-CCB0C7024A68}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -77,6 +81,10 @@ Global
 		{4C03EFC2-D382-4CD5-B9F4-B2CDC2CE0EE4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4C03EFC2-D382-4CD5-B9F4-B2CDC2CE0EE4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4C03EFC2-D382-4CD5-B9F4-B2CDC2CE0EE4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C8F0FA3F-D2B7-43CB-A45D-CCB0C7024A68}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C8F0FA3F-D2B7-43CB-A45D-CCB0C7024A68}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C8F0FA3F-D2B7-43CB-A45D-CCB0C7024A68}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C8F0FA3F-D2B7-43CB-A45D-CCB0C7024A68}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -92,6 +100,7 @@ Global
 		{0B8E9302-1733-4533-9A7C-B33D448A79D0} = {80C4359F-4293-4795-BDAB-6471FB61AAF4}
 		{009B2421-32FD-43DE-B192-A0A6E747438C} = {630CD901-FFCC-48E9-A65F-AC177AC79183}
 		{4C03EFC2-D382-4CD5-B9F4-B2CDC2CE0EE4} = {630CD901-FFCC-48E9-A65F-AC177AC79183}
+		{C8F0FA3F-D2B7-43CB-A45D-CCB0C7024A68} = {5CF99196-6409-44B1-A68C-1E31DA621670}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C7B40F89-89FC-46C9-A510-F4299CBAF0DC}
