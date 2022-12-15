@@ -25,9 +25,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Eaglez.Services.OrderAPI", 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Payments", "Payments", "{80C4359F-4293-4795-BDAB-6471FB61AAF4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PaymentProcessor", "PaymentProcessor\PaymentProcessor.csproj", "{0B8E9302-1733-4533-9A7C-B33D448A79D0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PaymentProcessor", "PaymentProcessor\PaymentProcessor.csproj", "{0B8E9302-1733-4533-9A7C-B33D448A79D0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Eaglez.Services.PaymentAPI", "Eaglez.Services.PaymentAPI\Eaglez.Services.PaymentAPI.csproj", "{009B2421-32FD-43DE-B192-A0A6E747438C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Eaglez.Services.PaymentAPI", "Eaglez.Services.PaymentAPI\Eaglez.Services.PaymentAPI.csproj", "{009B2421-32FD-43DE-B192-A0A6E747438C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Eaglez.Services.Emails", "Eaglez.Services.Emails\Eaglez.Services.Emails.csproj", "{4C03EFC2-D382-4CD5-B9F4-B2CDC2CE0EE4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -71,6 +73,10 @@ Global
 		{009B2421-32FD-43DE-B192-A0A6E747438C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{009B2421-32FD-43DE-B192-A0A6E747438C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{009B2421-32FD-43DE-B192-A0A6E747438C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4C03EFC2-D382-4CD5-B9F4-B2CDC2CE0EE4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4C03EFC2-D382-4CD5-B9F4-B2CDC2CE0EE4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4C03EFC2-D382-4CD5-B9F4-B2CDC2CE0EE4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4C03EFC2-D382-4CD5-B9F4-B2CDC2CE0EE4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -85,6 +91,7 @@ Global
 		{3F13DFE1-A437-4260-809A-1220470D7079} = {630CD901-FFCC-48E9-A65F-AC177AC79183}
 		{0B8E9302-1733-4533-9A7C-B33D448A79D0} = {80C4359F-4293-4795-BDAB-6471FB61AAF4}
 		{009B2421-32FD-43DE-B192-A0A6E747438C} = {630CD901-FFCC-48E9-A65F-AC177AC79183}
+		{4C03EFC2-D382-4CD5-B9F4-B2CDC2CE0EE4} = {630CD901-FFCC-48E9-A65F-AC177AC79183}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C7B40F89-89FC-46C9-A510-F4299CBAF0DC}

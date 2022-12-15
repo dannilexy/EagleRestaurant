@@ -149,7 +149,10 @@ namespace Eagle.Services.ShoppingCartAPI.Controllers
                 //Login to add message to process Order
                 try
                 {
-                    await _messageBus.PublishMessage(checkOutHeaderDto, "checkOutMessageTopic");
+                    //await _messageBus.PublishMessage(checkOutHeaderDto, "checkOutMessageTopic");
+                    
+                    //Changing message publishing from topic to queue
+                    await _messageBus.PublishMessage(checkOutHeaderDto, "checkoutqueue");
                 }
                 catch (Exception)
                 {

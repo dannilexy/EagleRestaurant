@@ -33,7 +33,12 @@ namespace Eaglez.Services.OrderAPI.Messaging
             orderUpdatePaymentProcessTopic = _config.GetValue<string>("OrderUpdatePaymentProcessTopic");
 
             var serviceBusClient = new ServiceBusClient(serviceBusConnectionString);
-            checkOutProcessor = serviceBusClient.CreateProcessor(checkOutMessageTopic, subscriptionName);
+
+            //the commented line works for topic and subscription
+            //checkOutProcessor = serviceBusClient.CreateProcessor(checkOutMessageTopic, subscriptionName);
+
+            //The line below is for queue
+            checkOutProcessor = serviceBusClient.CreateProcessor("checkoutqueue");
             orderUpdatePaymentStatusProcessor = serviceBusClient.CreateProcessor(orderUpdatePaymentProcessTopic, subscriptionName);
         }
 
@@ -110,6 +115,7 @@ namespace Eaglez.Services.OrderAPI.Messaging
                 ExpiryMonthYear = orderHeader.ExpiryMonthYear,
                 OrderId = orderHeader.OrderHeaderId,
                 OrderTotal = orderHeader.OrderTotal,
+                Email = orderHeader.Email,
             };
             try
             {
